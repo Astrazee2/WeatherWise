@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weatherwise - Sign Up</title>
+  <link rel="stylesheet" href="../static/css/signup.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+   <header>
+    <nav>
+      <div class="logo">
+      <a href="home.html">
+        <h2>WeatherWise</h2>
+      </div>
+      <ul>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+        <li><a href="{{ url_for('about') }}">About Us</a></li>
+        <li><a href="{{ url_for('login') }}">Log In</a></li>
+        <li><a href="{{ url_for('signup') }}" class="btn-signup">Sign Up</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="left-section">
+      <img src="../static/images/logo.png" alt="Weatherwise Logo" class="logo">
+      <h1>Join WeatherWise Today</h1>
+      <p>Start optimizing your inventory with AI-powered weather insights</p>
+    </div>
+
+    <div class="right-section">
+      <div class="form-container">
+        <img src="../static/images/logo.png" alt="Weatherwise Logo" class="small-logo">
+        <h2>Create an account</h2>
+        <p class="subtitle">Start your 30-day free trial</p>
+
+        <form action="/signup" method="POST">
+          <div class="form-group">
+            <label for="name">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Enter your first name">
+          </div>
+
+          <div class="form-group">
+            <label for="name">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Enter your last name">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email">
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password">
+          </div>
+
+          <div class="options">
+            <label class="checkbox-container">
+              <input type="checkbox">
+              <span class="checkmark"></span>
+              Remember for 30 days
+            </label>
+          </div>
+
+          <button type="submit" class="btn primary">Get Started</button>
+          <a href="{{ url_for('login_google') }}" class="btn secondary">
+            <img src="../static/images/google-icon.png" alt="Google" class="google-icon">
+            Sign up with Google
+          </a>
+
+          <p class="login-text">Already have an account? <a href="{{ url_for('login') }}">Sign in</a></p>
+        </form>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

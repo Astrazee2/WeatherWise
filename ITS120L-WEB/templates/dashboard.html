@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WeatherWise Dashboard</title>
+  <link rel="stylesheet" href="../static/css/dashboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+  <div class="logo">
+    <a href="{{ url_for('home') }}">
+      <img src="../static/images/logo.png" alt="WeatherWise Logo" class="logo-img">
+      <span>WeatherWise</span>
+    </a>
+  </div>
+
+
+  <nav>
+    <ul>
+      <li class="active">
+        <a href="{{ url_for('dashboard') }}">
+          <img src="../static/images/dashboardicon.png" alt="Dashboard" class="icon">
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('inventory') }}">
+          <img src="../static/images/inventoryicon.png" alt="Inventory" class="icon">
+          <span>Inventory</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('forecasting_report') }}">
+          <img src="../static/images/reportsicon.png" alt="Forecasting & Reports" class="icon">
+          <span>Forecasting & Reports</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('suppliers') }}">
+          <img src="../static/images/suppliersicon.png" alt="Suppliers" class="icon">
+          <span>Suppliers</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('orders') }}">
+          <img src="../static/images/ordersicon.png" alt="Orders" class="icon">
+          <span>Orders</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('mngstore') }}">
+          <img src="../static/images/mngstoreicon.png" alt="Manage Store" class="icon">
+          <span>Manage Store</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+<div class="bottom-links">
+   <div><a href="{{ url_for('logout') }}">Log Out</a></div>
+</aside>
+
+
+    <main class="main">
+      <header>
+        <input type="text" placeholder="Search product, supplier, order" />
+      </header>
+
+    <section class="cards">
+      <div class="card" id="card-revenue">
+        <h3>Sales Overview</h3>
+        <p class="value">₱0.00</p>
+        <p class="meta">0 forecasts</p>
+      </div>
+      <div class="card" id="card-inventory">
+        <h3>Inventory Summary</h3>
+        <p class="value">0 units</p>
+        <p class="meta">0 low-stock items</p>
+      </div>
+      <div class="card" id="card-profit">
+        <h3>Purchase / Profit</h3>
+        <p class="value">₱0.00</p>
+        <p class="meta">Profit estimate</p>
+      </div>
+      <div class="card" id="card-products">
+        <h3>Product Summary</h3>
+        <p class="value">0 top items</p>
+        <p class="meta">Configured suppliers & categories</p>
+      </div>
+    </section>
+
+      <section class="charts">
+        <div class="chart-container">
+          <h3>Sales & Purchase</h3>
+          <canvas id="salesChart"></canvas>
+        </div>
+        <div class="chart-container">
+          <h3>Order Summary</h3>
+          <canvas id="orderChart"></canvas>
+        </div>
+      </section>
+
+      <section class="tables">
+        <div class="table">
+          <h3>Top Selling Stock</h3>
+          <div id="top-selling-list" class="top-selling-list"></div>
+          <table id="top-selling-table">
+            <thead><tr><th>Item</th><th>Sold</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="table">
+          <h3>Inventory Snapshot</h3>
+          <table id="inventory-table">
+            <thead><tr><th>Item</th><th>Remaining</th><th>Min</th><th>Last Updated</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="table">
+          <h3>Recent Orders</h3>
+          <table id="recent-orders">
+            <thead><tr><th>Product</th><th>Created</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/js/dashboard.js"></script>
+</body>
+</html>

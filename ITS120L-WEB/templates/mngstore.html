@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Store - WeatherWise</title>
+  <link rel="stylesheet" href="../static/css/mngstore.css" />
+    <link rel="stylesheet" href="../static/css/dashboard.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">
+        <a href="{{ url_for('home') }}">
+          <img src="../static/images/logo.png" alt="WeatherWise Logo" class="logo-img">
+          <span>WeatherWise</span>
+        </a>
+      </div>
+
+      <nav>
+        <ul>
+          <li>
+        <a href="{{ url_for('dashboard') }}">
+          <img src="../static/images/dashboardicon.png" alt="Dashboard" class="icon">
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('inventory') }}">
+          <img src="../static/images/inventoryicon.png" alt="Inventory" class="icon">
+          <span>Inventory</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('forecasting_report') }}">
+          <img src="../static/images/reportsicon.png" alt="Forecasting & Reports" class="icon">
+          <span>Forecasting & Reports</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('suppliers') }}">
+          <img src="../static/images/suppliersicon.png" alt="Suppliers" class="icon">
+          <span>Suppliers</span>
+        </a>
+      </li>
+          <li>
+            <a href="{{ url_for('orders') }}">
+              <img src="../static/images/ordersicon.png" alt="Orders" class="icon">
+              <span>Orders</span>
+            </a>
+          </li>
+          <li class="active">
+            <a href="{{ url_for('mngstore') }}">
+              <img src="../static/images/mngstoreicon.png" alt="Manage Store" class="icon">
+              <span>Manage Store</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="bottom-links">
+        <div><a href="{{ url_for('logout') }}">Log Out</a></div> 
+      </div>
+    </aside>
+
+    <main class="main">
+      <header>
+        <input type="text" placeholder="Search store settings..." />
+      </header>
+
+      <!-- Store Profile Section -->
+      <section class="store-profile-section">
+        <div class="section-header">
+          <h1>Store Profile</h1>
+          <div class="completion-status">
+            <span class="status-text">Profile Completion</span>
+            <div class="progress-container">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 50%"></div>
+              </div>
+              <span class="progress-text">6/12</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-content">
+          <div class="profile-form">
+            <form id="storeProfileForm">
+              <div class="form-section">
+                <h3>Basic Information</h3>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="storeName">Store Name</label>
+                    <input type="text" id="storeName" name="storeName" required>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="storeType">Store Type</label>
+                    <select id="storeType" name="storeType" required>
+                      <option value="retail">Retail Store</option>
+                      <option value="supermarket">Supermarket</option>
+                      <option value="convenience">Convenience Store</option>
+                      <option value="wholesale">Wholesale</option>
+                      <option value="online">Online Store</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="storeCode">Store Code</label>
+                    <input type="text" id="storeCode" name="storeCode" required>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="branchLocation">Branch/Location</label>
+                    <input type="text" id="branchLocation" name="branchLocation" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="fullAddress">Full Address</label>
+                  <textarea id="fullAddress" name="fullAddress" rows="3" required></textarea>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <h3>Contact Information</h3>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="managerName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="managerName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName"  required>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="contactNumber">Contact Number</label>
+                    <input type="tel" id="contactNumber" name="contactNumber" value="09828389238" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="emailAddress">Email Address</label>
+                  <input type="email" id="emailAddress" name="emailAddress" disabled readonly>
+                </div>
+              </div>
+
+          
+
+              <div class="form-actions">
+                <button type="button" class="btn secondary" id="discardBtn">Discard Changes</button>
+                <button type="submit" class="btn primary">Save Profile</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="profile-sidebar">
+            <div class="store-card">
+              <div class="store-header">
+                <div class="store-info">
+                  <h3 id="summaryStoreName">—</h3>
+                  <span class="store-badge" id="summaryStoreType">—</span>
+                </div>
+              </div>
+              
+              <div class="store-details">
+                <div class="detail-item">
+                  <span class="detail-label">Store Code:</span>
+                  <span class="detail-value" id="summaryStoreCode">—</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Location:</span>
+                  <span class="detail-value" id="summaryBranchLocation">—</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Manager:</span>
+                  <span class="detail-value" id="summaryManager">—</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Contact:</span>
+                  <span class="detail-value" id="summaryContact">—</span>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="quick-actions">
+              <h4>Quick Actions</h4>
+              <button class="action-btn" id="exportDataBtn">
+                <span class="action-icon"></span>
+                Export Store Data
+              </button>
+              <button class="action-btn" id="resetBtn">
+                <span class="action-icon"></span>
+                Reset to Default
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div class="modal" id="confirmationModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">Confirm Action</h3>
+        <button class="close-btn" id="closeModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="modalMessage">Are you sure you want to perform this action?</p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn secondary" id="cancelBtn">Cancel</button>
+        <button class="btn primary" id="confirmBtn">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/mngstore.js"></script>
+</body>
+</html>

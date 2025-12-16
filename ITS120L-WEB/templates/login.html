@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weatherwise - Login</title>
+  <link rel="stylesheet" href="css/login.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+      <a href="home.html">
+        <h2>WeatherWise</h2>
+      </div>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="login.html" class="active">Sign In</a></li>
+        <li><a href="signup.html" class="btn-signup">Sign Up</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="left-section">
+      <img src="images/logo.png" alt="Weatherwise Logo" class="logo">
+      <h1>Welcome Back to WeatherWise</h1>
+      <p>Access your AI-powered inventory management dashboard</p>
+    </div>
+
+    <div class="right-section">
+      <div class="form-container">
+        <img src="images/logo.png" alt="Weatherwise Logo" class="small-logo">
+        <h2>Log in to your workspace</h2>
+        <p class="subtitle">Welcome back! Please enter your details.</p>
+
+        <form>
+          <div class="form-group">
+            <label for="workspace">Workspace Code</label>
+            <input type="text" id="workspace" name="workspace" placeholder="Enter your workspace code">
+          </div>
+
+          <div class="options">
+            <label class="checkbox-container">
+              <input type="checkbox">
+              <span class="checkmark"></span>
+              Remember for 30 days
+            </label>
+            <a href="forgot.html" class="forgot-link">Forgot workspace code?</a>
+          </div>
+
+          <button type="submit" class="btn primary">Enter Workspace</button>
+          <button type="button" class="btn secondary">Enter Workspace with Invite Link</button>
+
+          <p class="signup-text">Don't have an account? <a href="signup.html">Create one</a></p>
+        </form>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

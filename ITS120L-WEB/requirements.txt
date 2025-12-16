@@ -1,0 +1,12 @@
+Flask
+Flask-Login
+Flask-Mail
+Authlib
+mysql-connector-python
+Werkzeug
+python-dotenv
+pytz
+joblib
+numpy
+reportlab
+gunicorn

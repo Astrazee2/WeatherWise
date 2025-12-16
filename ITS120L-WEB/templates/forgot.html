@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forgot Password - WeatherWise</title>
+  <link rel="stylesheet" href="../static/css/forgot.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+      <a href="{{ url_for('home') }}">
+        <h2>WeatherWise</h2>
+      </div>
+      <ul>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+        <li><a href="{{ url_for('about') }}">About Us</a></li>
+        <li><a href="{{ url_for('login') }}">Log In</a></li>
+        <li><a href="{{ url_for('signup') }}" class="btn-signup">Sign Up</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="left-section">
+      <img src="../static/images/logo.png" alt="Weatherwise Logo" class="logo">
+      <h1>Reset Your Password</h1>
+      <p>We'll help you get back into your WeatherWise account quickly and securely.</p>
+      <div class="feature-list">
+        <div class="feature-item">
+          <span class="feature-icon">🔒</span>
+          <span>Secure password reset process</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">⚡</span>
+          <span>Instant email delivery</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🛡️</span>
+          <span>Protected by enterprise security</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-section">
+      <div class="form-container">
+        <img src="../static/images/logo.png" alt="Weatherwise Logo" class="small-logo">
+        <h2>Reset Your Password</h2>
+        <p class="subtitle">Enter your email address and we'll send you instructions to reset your password.</p>
+
+        <form id="forgotPasswordForm">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+          </div>
+
+          <button type="submit" class="btn primary">Send Reset Instructions</button>
+          
+          <div class="back-to-login">
+            <a href="{{ url_for('login') }}" class="back-link">
+              <span class="arrow">←</span>
+              Back to Sign In
+            </a>
+          </div>
+        </form>
+
+        <!-- Success Message (Hidden by default) -->
+        <div id="successMessage" class="success-message" style="display: none;">
+          <div class="success-icon">✓</div>
+          <h3>Check Your Email</h3>
+          <p>We've sent password reset instructions to your email address.</p>
+          <p class="email-sent">sent to: <span id="userEmail"></span></p>
+          <div class="success-actions">
+            <a href="login2.html" class="btn secondary">Return to Sign In</a>
+            <p class="resend-text">Didn't receive the email? <a href="#" id="resendLink">Resend</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('email').value;
+      document.getElementById('userEmail').textContent = email;
+      
+      // Hide form and show success message
+      document.getElementById('forgotPasswordForm').style.display = 'none';
+      document.getElementById('successMessage').style.display = 'block';
+    });
+
+    document.getElementById('resendLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      alert('Reset instructions have been resent to your email.');
+    });
+  </script>
+</body>
+</html>

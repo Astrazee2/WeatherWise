@@ -1,0 +1,372 @@
+
+
+/* Overview Cards */
+.overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.overview .card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  padding: 20px;
+  text-align: center;
+}
+
+.overview .card h3 {
+  font-size: 14px;
+  color: #888;
+}
+
+.overview .card p {
+  font-size: 20px;
+  color: #007aff;
+  font-weight: 600;
+  margin: 6px 0;
+}
+
+.overview .card span {
+  font-size: 12px;
+  color: #999;
+}
+
+
+
+/* Table Section */
+.inventory-section {
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.section-header h2 {
+  font-size: 18px;
+  color: #333;
+}
+
+.section-buttons button {
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-left: 5px;
+}
+
+.addbtn {
+  background: #007aff;
+  color: #fff;
+}
+
+.addbtn:hover {
+  background: #0062cc;
+}
+
+.filtersBtn,
+.download-btn {
+  background: #f0f0f0;
+  color: #555;
+}
+
+.filtersBtn:hover,
+.download-btn:hover {
+  background: #e0e0e0;
+}
+
+/* Row Actions Buttons */
+.row-actions button {
+  border: none;
+  border-radius: 6px;       /* same as section-buttons */
+  padding: 8px 14px;        /* same as section-buttons */
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-left: 5px;
+}
+
+/* Edit Button */
+#editRowBtn {
+  background: #f0f0f0;      /* same as filter/download */
+  color: #555;
+}
+
+#editRowBtn:hover {
+  background: #e0e0e0;
+}
+
+/* Delete Button */
+#deleteRowBtn {
+  background: #e74c3c;
+  color: #fff;
+}
+
+#deleteRowBtn:hover {
+  background: #c0392b;
+}
+
+
+
+/* MODAL CONTAINER FOR ADD PRODUCT POP UP*/
+
+
+
+.modal-container {
+  display: none; /* start hidden */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.3);
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+
+.modal-container.show {
+  display: flex; 
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+.modal{
+  background-color: rgb(255, 255, 255);
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  width: 600px;
+  max-width: 100%;
+}
+
+.modal h1{
+  margin-bottom: 10px;
+}
+
+.modal-btns{
+  display:flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.modal-btns button {
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-left: 5px;
+}
+
+.savebtn{
+  background: #007aff;
+  color: white;
+}
+
+
+/* Form inside MODAL */
+.form-container {
+  margin-top: 10px;
+}
+
+.form-container form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  gap: 15px 20px; /* vertical and horizontal gaps */
+  margin-top: 10px;
+}
+
+/* Make full width fields (like category dropdowns) span both columns */
+.form-container form select,
+.form-container form input[type="date"] {
+  width: 100%;
+}
+
+/* Style labels and inputs consistently */
+.form-container label {
+  font-weight: 500;
+  color: #333;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.form-container input,
+.form-container select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+/* Inventory Table */
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.inventory-table th,
+.inventory-table td {
+  padding: 12px 10px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.inventory-table th {
+  background: #fafafa;
+  color: #666;
+  font-weight: 600;
+}
+
+.inventory-table tr:hover {
+  background: #f9fbff;
+}
+
+/* Status Colors */
+.status.in-stock {
+  color: #28a745;
+  font-weight: 600;
+}
+
+.status.out-stock {
+  color: #dc3545;
+  font-weight: 600;
+}
+
+.status.low-stock {
+  color: #fd7e14;
+  font-weight: 600;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 15px;
+  gap: 10px;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.pagination button:hover {
+  background: #007aff;
+  color: #fff;
+}
+
+tr.selected {
+  background-color: #d0ebff;
+}
+
+tr.selected:hover {
+  background-color: #a0d4ff;
+}
+
+/* FILTER POPUP STYLES */
+.filtersPopup {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 40px;
+  padding: 15px;
+  z-index: 100;
+}
+
+.filtersPopup.show {
+  display: flex; /* ✅ show and center the popup */
+}
+
+.filtersPopup.active {
+  display: block;
+}
+
+.filters-content {
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  width: 350px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  text-align: left;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.filters-content h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+.filter-group {
+  margin-bottom: 15px;
+}
+
+.filter-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.filter-group select,
+.filter-group input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.filter-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.filter-actions button {
+  background: #0056b3;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.filter-actions button:hover {
+  background: #003d80;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}

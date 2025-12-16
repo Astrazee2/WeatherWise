@@ -1,0 +1,195 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: #fff;
+  color: #333;
+}
+
+/* --- NAVIGATION --- */
+header {
+  width: 100%;
+  padding: 20px 35px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo h2 {
+  color: #00aaff;
+  font-weight: 700;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #00aaff;
+}
+
+nav a.active {
+  color: #00aaff;
+}
+
+.btn-signup {
+  background-color: #00aaff;
+  color: white !important;
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-signup:hover {
+  background-color: #007acc;
+}
+
+/* --- MAIN LAYOUT --- */
+.container {
+  display: flex;
+  justify-content: space-between; /* gives equal space between left & right */
+  align-items: center;
+  height: calc(100vh - 80px); /* keeps header height offset */
+  padding: 0 100px; /* add side padding for breathing room */
+  gap: 80px; /* adds consistent space between sections */
+}
+
+
+
+
+.left-section .logo {
+  width: 500px;        /* increased size */
+  max-width: 100%;     /* prevents overflow on smaller screens */
+}
+
+
+.left-section h1 {
+  margin-top: 15px;
+  font-size: 32px;
+  color: #003366;
+}
+
+.left-section,
+.right-section {
+  flex: 1;            /* share equal width */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Center the small logo */
+.right-section .small-logo {
+  width: 200px;         /* increased size */
+  display: block;
+  margin: 0 auto 20px;  /* more space below */
+}
+
+h2 {
+  font-size: 22px;
+  margin-bottom: 5px;
+  text-align: center;      /* center heading to match logo */
+}
+
+p {
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-align: center;      /* center intro text */
+}
+
+/* --- FORM STYLING --- */
+form label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  margin-bottom: 20px; /* increased spacing below */
+  gap: 10px; /* adds breathing space between checkbox text and link */
+}
+
+.options label {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* small gap between checkbox and text */
+}
+
+.options a {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 13px;
+  margin-left: 10px; /* optional: extra space from label */
+  margin-bottom: 8px; /* increased spacing below */
+}
+
+
+.options input[type="checkbox"] {
+  vertical-align: middle;
+  transform: translateY(-1px);
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.btn.primary {
+  background-color: #0066ff;
+  color: white;
+}
+
+.btn.secondary {
+  background-color: white;
+  color: #0066ff;
+  border: 1px solid #0066ff;
+}
+
+.signup-text {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 13px;
+}
+
+.signup-text a {
+  color: #0066ff;
+  text-decoration: none;
+}

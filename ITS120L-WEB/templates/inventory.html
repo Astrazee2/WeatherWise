@@ -1,0 +1,252 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WeatherWise | Inventory</title>
+    <link rel="stylesheet" href="../static/css/dashboard.css" />
+    <link rel="stylesheet" href="../static/css/inventory.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="logo">
+          <a href="{{ url_for('home') }}">
+            <img src="../static/images/logo.png" alt="WeatherWise Logo" class="logo-img">
+            <span>WeatherWise</span>
+          </a>
+        </div>
+
+        <nav>
+          <ul>
+            <li>
+          <a href="{{ url_for('dashboard') }}">
+            <img src="../static/images/dashboardicon.png" alt="Dashboard" class="icon">
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="active">
+          <a href="{{ url_for('inventory') }}">
+            <img src="../static/images/inventoryicon.png" alt="Inventory" class="icon">
+            <span>Inventory</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ url_for('forecasting_report') }}">
+            <img src="../static/images/reportsicon.png" alt="Forecasting & Reports" class="icon">
+            <span>Forecasting & Reports</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ url_for('suppliers') }}">
+            <img src="../static/images/suppliersicon.png" alt="Suppliers" class="icon">
+            <span>Suppliers</span>
+          </a>
+        </li>
+            <li>
+              <a href="{{ url_for('orders') }}">
+                <img src="../static/images/ordersicon.png" alt="Orders" class="icon">
+                <span>Orders</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ url_for('mngstore') }}">
+                <img src="../static/images/mngstoreicon.png" alt="Manage Store" class="icon">
+                <span>Manage Store</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="bottom-links">
+          <div><a href="{{ url_for('logout') }}">Log Out</a></div>
+        </div>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="main">
+          <header>
+          <input type="text" placeholder="Search product, etc..." />
+          </header>
+
+  <section class="overview">
+    <div class="card">
+      <h3>Total Products</h3>
+      <p id="totalProducts">0</p>
+
+    </div>
+    <div class="card">
+      <h3>No. of products with surplus stock</h3>
+      <p id="surplusCount">0</p>
+
+    </div>
+    <div class="card">
+      <h3>No. of products with stock deficit</h3>
+      <p id="deficitCount">0</p>
+
+    </div>
+  </section>
+
+          <section class="inventory-section">
+          <div class="section-header">
+              <h2>View Inventory</h2>
+              <div class="section-buttons">
+              <button class="addbtn" id="addbtn">Add Product</button>
+              <button id="filtersBtn">Filters</button>
+              <button class="download-btn">Download All</button>
+              </div>
+          </div>
+
+          <table class="inventory-table" id="inventoryTable">
+              <thead>
+                <tr>
+                  <th>Inventory ID</th>
+                  <th>Product ID</th>
+                  <th>Supplier ID</th>
+                  <th>Product Name</th>
+                  <th>Category</th>
+                  <th>Quantity</th>
+                  <th>Unit</th>
+                  <th>Minimum Threshold</th>
+                  <th>Maximum Threshold</th>
+                  <th>Last Updated</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for item in inventory %}
+              <tr>
+                  <td>{{ item.inventoryID }}</td>
+                  <td>{{ item.productID }}</td>
+                  <td>{{ item.supplierID }}</td>
+                  <td>{{ item.prodName }}</td>
+                  <td>{{ item.category }}</td>
+                  <td>{{ item.quantity }}</td>
+                  <td>{{ item.unit }}</td>
+                  <td>{{ item.minThreshold }}</td>
+                  <td>{{ item.maxThreshold }}</td>
+                  <td>{{ item.lastUpdated }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <div id="filtersPopup" class="filtersPopup">
+          <div class="filters-content">
+            <h3>Filter Inventory</h3>
+
+              <div class="filter-group">
+              <label for="supplierFilter">Supplier:</label>
+              <select id="supplierFilter">
+                <option value="">All</option>
+                <!-- JS will fetch /get_suppliers and populate -->
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label>Category:</label>
+              <select id="categoryFilter">
+                <option value="">All</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="unitFilter">Unit:</label>
+              <select id="unitFilter">
+                <option value="">All</option>
+                <!-- JS will populate with units -->
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label>Quantity:</label>
+              <select id="qtyCondition">
+                <option value="">None</option>
+                <option value="gt">Greater than</option>
+                <option value="lt">Less than</option>
+              </select>
+              <input type="number" id="qtyValue" placeholder="Enter quantity">
+            </div>
+
+            <div class="filter-actions">
+              <button id="applyFilters">Apply</button>
+              <button id="clearFilters">Clear</button>
+            </div>
+          </div>
+        </div>
+
+          <div class="row-actions">
+          <button class="editRowBtn" id="editRowBtn" style="display:none;">Edit Selected</button>
+          <button class="deleteRowBtn" id="deleteRowBtn" style="display:none;">Delete Selected</button>
+          </div>  
+          <div class="pagination">
+              <button id="prevBtn">Previous</button>
+              <span id="pageInfo">Page 1 of 10</span>
+              <button id="nextBtn">Next</button>
+          </div>
+          </section>
+      </main>
+      </div>
+    
+      <div class="modal-container" id="modal_container">
+  <div class="modal">
+    <h1>Add Product</h1>
+    <div class="form-container">
+      <form id="addProdForm">
+
+        <label for="supplierID">Supplier ID</label>
+        <input type="number" id="supplierID" name="supplierID" required>
+        
+        <label for="prodName">Product Name</label>
+        <input type="text" id="prodName" name="prodName" required>
+
+        <label for="category">Category</label>
+        <select id="category" name="category" required>
+          <option value="" disabled selected></option>
+          <option value="Snacks">Snacks</option>
+          <option value="Fruits">Fruits</option>
+          <option value="Vegetables">Vegetables</option>
+          <option value="Beverages">Beverages</option>
+          <option value="Dairy">Dairy</option>
+          <option value="Meat">Meat</option>
+          <option value="Condiments">Condiments</option>
+          <option value="Bakery">Bakery</option>
+          <option value="Frozen">Frozen</option>
+        </select>
+
+        <label for="unit">Unit</label>
+        <select id="unit" name="unit" required>
+          <option value="" disabled selected></option>
+          <option value="pcs">Pieces (pcs)</option>
+          <option value="kg">Kilograms (kg)</option>
+          <option value="g">Grams (g)</option>
+          <option value="L">Liters (L)</option>
+          <option value="ml">Milliliters (ml)</option>
+          <option value="packs">Packs</option>
+          <option value="boxes">Boxes</option>
+          <option value="bottles">Bottles</option>
+          <option value="trays">Trays</option>
+        </select>
+
+        <label for="quantity">Quantity</label>
+        <input type="number" id="quantity" name="quantity">
+
+        <label for="minThreshold">Minimum Threshold</label>
+        <input type="number" id="minThreshold" name="minThreshold" required>
+
+        <label for="maxThreshold">Maximum Threshold</label>
+        <input type="number" id="maxThreshold" name="maxThreshold" required>
+
+      </form>
+    </div>
+
+    <div class="modal-btns">
+      <button id="closebtn">Close</button>
+      <button class="savebtn" id="savebtn">Save</button>
+    </div>
+  </div>
+</div>
+
+
+    <script src="../static/js/inventory.js"></script>
+  </body>
+  </html>

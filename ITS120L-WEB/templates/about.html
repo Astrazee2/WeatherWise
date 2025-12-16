@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - WeatherWise</title>
+  <link rel="stylesheet" href="../static/css/about.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+      <a href="{{ url_for('home') }}">
+        <h2>WeatherWise</h2>
+      </div>
+      <ul>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+        <li><a href="{{ url_for('about') }}" class="active">About Us</a></li>
+        <li><a href="{{ url_for('login') }}">Log In</a></li>
+        <li><a href="{{ url_for('signup') }}" class="btn-signup">Sign Up</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="about-hero">
+    <div class="container">
+      <h1>WHO WE ARE</h1>
+      <div class="about-content">
+        <div class="about-text">
+          <p>At WeatherWise, we specialize in AI-powered inventory management solutions that adapt to real-time weather conditions. Our goal is to help businesses predict demand, prevent shortages, and reduce excess inventory through smart data-driven forecasting.</p>
+          <p>We combine the power of artificial intelligence, meteorology, and secure technology to help retailers make informed decisions, minimize waste, and stay resilient in changing climates.</p>
+          <p>With innovation and precision at our core, WeatherWise empowers businesses to transform weather uncertainty into opportunity.</p>
+          <div class="mission-highlight">
+            <p>WeatherWise - Turning weather uncertainty into business advantage</p>
+          </div>
+        </div>
+        <div class="about-image">
+          <img src="../static/images/logo.png" alt="WeatherWise team collaborating">
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <section class="values-section">
+    <div class="container">
+      <h2>Our Values</h2>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">🌤️</div>
+          <h3>Innovation</h3>
+          <p>We continuously push the boundaries of what's possible with AI and weather data integration.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🎯</div>
+          <h3>Precision</h3>
+          <p>Our solutions deliver accurate, data-driven insights to optimize your inventory management.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🔒</div>
+          <h3>Security</h3>
+          <p>We prioritize the protection of your data with enterprise-grade security measures.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🤝</div>
+          <h3>Partnership</h3>
+          <p>We work closely with our clients to ensure our solutions meet their unique business needs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-section">
+    <div class="container">
+      <h2>Our Leadership Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-image">
+            <img src="../static/images/dummy.png" alt="Sarah Johnson - CEO">
+          </div>
+          <h3>Ricci Ayn Cordero</h3>
+          <p class="role">Scrum Master</p>
+          <p>Leads team coordination and project planning to ensure timely and efficient development cycles. Oversees task distribution and promotes collaboration across all development phases.</p>
+        </div>
+        <div class="team-member">
+          <div class="member-image">
+            <img src="../static/images/dummy.png" alt="Michael Chen - CTO">
+          </div>
+          <h3>Stephanie Zamoras</h3>
+          <p class="role">Front-end Developer</p>
+          <p>Designs and implements responsive user interfaces for WeatherWise. Focuses on creating intuitive and accessible user experiences that enhance usability and visual appeal.</p>
+        </div>
+        <div class="team-member">
+          <div class="member-image">
+            <img src="../static/images/dummy.png" alt="Elena Rodriguez - CPO">
+          </div>
+          <h3>Marc Dave Constantino</h3>
+          <p class="role">Back-end Developer</p>
+          <p>Responsible for server-side logic, database management, and AI integration. Ensures system stability, performance, and secure data flow between application layers.</p>
+        </div>
+        <div class="team-member">
+          <div class="member-image">
+            <img src="../static/images/dummy.png" alt="Elena Rodriguez - CPO">
+          </div>
+          <h3>Dean Matthew Flores</h3>
+          <p class="role">Q&A Tester</p>
+          <p>Conducts thorough testing of system features to identify bugs and performance issues. Ensures product reliability, accuracy, and alignment with user and business requirements.</p>
+        </div>     
+       </div>
+    </div>
+  </section>
+
+  <section class="story-section">
+    <div class="container">
+      <div class="story-content">
+        <h2>Our Story</h2>
+        <p>WeatherWise was born out of the challenges faced by small and medium-sized retailers during extreme weather events across Southeast Asia. When unpredictable heatwaves and sudden rainfall began disrupting local businesses—causing severe drops in foot traffic and unexpected inventory losses—our founders saw an opportunity to make a difference.</p>
+        <p>Recognizing how deeply weather impacts consumer demand and supply chain stability, a group of IT students and innovators came together to create an intelligent, data-driven solution. Combining expertise in AI, meteorology, and retail operations, they developed WeatherWise—an app designed to help retailers predict product demand, prevent overstocking and shortages, and protect sensitive business data.</p>
+        <p>Today, WeatherWise empowers businesses to turn weather uncertainty into a competitive advantage. Through AI-powered forecasting, smart inventory scheduling, and secure data management, our platform helps retailers save on costs, reduce waste, and improve sales performance.</p>
+        <div class="stats">
+          <div class="stat">
+            <h3>50+</h3>
+            <p>Enterprise Clients</p>
+          </div>
+          <div class="stat">
+            <h3>30%</h3>
+            <p>Average Waste Reduction</p>
+          </div>
+          <div class="stat">
+            <h3>99.9%</h3>
+            <p>Platform Uptime</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 WeatherWise. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

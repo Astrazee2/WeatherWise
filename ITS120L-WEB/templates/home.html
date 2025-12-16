@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weatherwise - Home</title>
+  <link rel="stylesheet" href="../static/css/home.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+      <a href="{{ url_for('home') }}">
+        <h2>WeatherWise</h2>
+      </div>
+      <ul>
+        <li><a href="{{ url_for('home') }}" class="active">Home</a></li>
+        <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+        <li><a href="{{ url_for('about') }}">About Us</a></li>
+        <li><a href="{{ url_for('login') }}">Log In</a></li>
+        <li><a href="{{ url_for('signup') }}" class="btn-signup">Sign Up</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="hero-section">
+    <div class="content">
+      <h1>Turn Weather Into <span class="highlight">Business Intelligence</span></h1>
+      <p>
+        WeatherWise redefines inventory management by transforming unpredictable weather into data-driven business insights. Our AI-powered platform combines real-time weather forecasts with sales and supply chain analytics, helping retailers anticipate demand changes, prevent stockouts, and minimize overstock waste.
+      </p>
+      <p>
+        Through smart scheduling, automated alerts, and personalized product recommendations, WeatherWise enables retailers to stay ahead of shifting customer needs. Meanwhile, our robust security framework—featuring data encryption and role-based access control—ensures that sensitive business information remains protected.      </p>
+      <p>
+        Whether it’s a sunny day, a sudden downpour, or a heatwave, WeatherWise empowers businesses to adapt seamlessly, make smarter decisions, improve customer satisfaction, and achieve long-term operational efficiency.      </p>
+      <div class="btn-container">
+          <a href="{{ url_for('about') }}">
+            <button class="btn-learn">LEARN MORE</button>
+          </a>
+      </div>
+    </div>
+
+    <div class="image-container">
+      <img src="../static/images/rain.jpg" alt="People walking with umbrellas">
+    </div>
+  </main>
+
+  <section class="features-section">
+    <div class="container">
+      <h2>How WeatherWise Works</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🌤️</div>
+          <h3>Weather Integration</h3>
+          <p>Real-time weather forecasts integrated with your sales data to predict demand fluctuations.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>AI-Powered Analytics</h3>
+          <p>Advanced algorithms analyze patterns to provide actionable inventory recommendations.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔔</div>
+          <h3>Smart Alerts</h3>
+          <p>Automated notifications for potential stockouts or overstock situations based on weather changes.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>Secure Collaboration</h3>
+          <p>Role-based access controls and encryption protect your sensitive business data.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mission-section">
+    <div class="container">
+      <div class="mission-content">
+        <h2>Our Mission</h2>
+        <div class="mission-text">
+          <p>At WeatherWise, we believe that the key to effective inventory management is anticipation, not reaction. By integrating AI-driven forecasting, weather intelligence, and secure data systems, we empower businesses to make proactive decisions and stay resilient in an ever-changing environment.</p>
+          <p class="mission-highlight">Smarter schedules, stronger supply chains, and satisfied customers — that’s the WeatherWise way.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 WeatherWise. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+
+</html>

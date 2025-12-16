@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weatherwise - Login</title>
+  <link rel="stylesheet" href="../static/css/login2.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+      <a href="{{ url_for('home') }}">
+        <h2>WeatherWise</h2>
+      </div>
+      <ul>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+        <li><a href="{{ url_for('about') }}">About Us</a></li>
+        <li><a href="{{ url_for('login') }}" class="active">Log In</a></li>
+        <li><a href="{{ url_for('signup') }}" class="btn-signup">Sign Up</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="left-section">
+      <img src="../static/images/logo.png" alt="Weatherwise Logo" class="logo">
+    </div>
+
+    <div class="right-section">
+      <img src="../static/images/logo.png" alt="Weatherwise Logo" class="small-logo">
+      <h2>Log in to your account</h2>
+      <p>Welcome back! Please enter your details.</p>
+
+      <form method="POST" action="/login">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email">
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password">
+
+        <div class="options">
+          <label><input type="checkbox"> Remember for 30 days</label>
+          <a href="{{ url_for('forgot') }}">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn primary">Sign In</button>
+        <a href="{{ url_for('login_google') }}" class="btn secondary">
+          <img src="../static/images/google-icon.png" alt="Google"> Sign in with Google
+        </a>
+
+        <p class="signup-text">Don't have an account? <a href="{{ url_for('signup') }}">Create one</a></p>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

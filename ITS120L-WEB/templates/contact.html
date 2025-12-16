@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - WeatherWise</title>
+  <link rel="stylesheet" href="../static/css/contact.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+      <a href="{{ url_for('home') }}">
+        <h2>WeatherWise</h2>
+      </div>
+      <ul>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('contact') }}" class="active">Contact Us</a></li>
+        <li><a href="{{ url_for('about') }}">About Us</a></li>
+        <li><a href="{{ url_for('login') }}">Log In</a></li>
+        <li><a href="{{ url_for('signup') }}" class="btn-signup">Sign Up</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="contact-hero">
+    <div class="container">
+      <h1>CONTACT US</h1>
+      <p class="hero-subtitle">If you're interested in collaborating, please provide your information, and we will contact you soon. We look forward to connecting with you.</p>
+      
+      <div class="contact-content">
+        <div class="contact-form-container">
+          <form class="contact-form">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" placeholder="Enter your name">
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="Enter your email">
+            </div>
+            
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" placeholder="Enter your message" rows="5"></textarea>
+            </div>
+            
+            <button type="submit" class="btn-send">Send</button>
+          </form>
+        </div>
+        
+        <div class="contact-info">
+          <div class="info-card">
+            <h3>Get in Touch</h3>
+            <div class="contact-item">
+              <div class="contact-icon">📧</div>
+              <div>
+                <h4>Email</h4>
+                <p>hello@weatherwise.com</p>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <div class="contact-icon">📞</div>
+              <div>
+                <h4>Phone</h4>
+                <p>+1 (555) 123-4567</p>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <div class="contact-icon">📍</div>
+              <div>
+                <h4>Office</h4>
+                <p>123 Business District<br>San Francisco, CA 94105</p>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <div class="contact-icon">🕒</div>
+              <div>
+                <h4>Business Hours</h4>
+                <p>Monday - Friday: 9AM - 6PM PST</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <section class="faq-section">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3>How quickly do you respond to inquiries?</h3>
+          <p>We typically respond to all contact form submissions within 24 hours during business days.</p>
+        </div>
+        
+        <div class="faq-item">
+          <h3>Do you offer custom solutions?</h3>
+          <p>Yes, we work with businesses of all sizes to create tailored inventory management solutions.</p>
+        </div>
+        
+        <div class="faq-item">
+          <h3>Is there a free trial available?</h3>
+          <p>We offer a 14-day free trial for all new business customers with full platform access.</p>
+        </div>
+        
+        <div class="faq-item">
+          <h3>What industries do you serve?</h3>
+          <p>We work with retail, e-commerce, hospitality, and any business affected by weather patterns.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Is my business data safe with WeatherWise?</h3>
+          <p>Absolutely. WeatherWise implements end-to-end encryption, secure cloud storage, and role-based access control to ensure your data remains protected from unauthorized access and breaches.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>How does WeatherWise use AI for inventory forecasting?</h3>
+          <p>WeatherWise uses artificial intelligence to analyze real-time weather data alongside historical sales and inventory trends. This allows the system to predict demand changes, optimize stock levels, and prevent overstock or shortages before they happen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 WeatherWise. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

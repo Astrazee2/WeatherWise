@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forecasting & Reports - WeatherWise</title>
+  <link rel="stylesheet" href="static/css/dashboard.css" />
+  <link rel="stylesheet" href="static/css/forecasting.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">
+        <a href="home.html">
+          <img src="../static/images/logo.png" alt="WeatherWise Logo" class="logo-img">
+          <span>WeatherWise</span>
+        </a>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('dashboard') }}"><img src="../static/images/dashboardicon.png" alt="Dashboard" class="icon"><span>Dashboard</span></a></li>
+          <li><a href="{{ url_for('inventory') }}"><img src="../static/images/inventoryicon.png" alt="Inventory" class="icon"><span>Inventory</span></a></li>
+          <li class="active"><a href="{{ url_for('forecasting_report') }}"><img src="../static/images/reportsicon.png" alt="Forecasting & Reports" class="icon"><span>Forecasting & Reports</span></a></li>
+          <li><a href="{{ url_for('suppliers') }}"><img src="../static/images/suppliersicon.png" alt="Suppliers" class="icon"><span>Suppliers</span></a></li>
+          <li><a href="{{ url_for('orders') }}"><img src="../static/images/ordersicon.png" alt="Orders" class="icon"><span>Orders</span></a></li>
+          <li><a href="{{ url_for('mngstore') }}"><img src="../static/images/mngstoreicon.png" alt="Manage Store" class="icon"><span>Manage Store</span></a></li>
+        </ul>
+      </nav>
+
+      <div class="bottom-links">
+        <div><a href="{{ url_for('logout') }}">Log Out</a></div> 
+      </div>
+    </aside>
+
+    <main class="main">
+      <header>
+        <input type="text" placeholder="Search reports, forecasts, products..." />
+      </header>
+
+      <!-- Weather Forecast Section -->
+      <section class="weather-section">
+        <div class="weather-card">
+          <div class="weather-header">
+            <h3>Today's Weather</h3>
+            <span class="date">October 19</span>
+          </div>
+          
+          <!-- City Search Box -->
+          <div class="city-search-container">
+            <input type="text" id="citySearch" placeholder="Search for a city..." />
+            <button id="searchBtn">Search</button>
+            <div id="searchResults" class="search-results"></div>
+          </div>
+          
+          <div class="weather-content">
+            <div class="weather-icon">🌧️</div>
+            <div class="weather-details">
+              <div class="temp">24°C</div>
+              <div class="condition">Rainy</div>
+              <div class="weather-stats">
+                <div>Wind: 111 km/h</div>
+                <div>Humidity: 100%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="forecast-actions">
+          <button class="btn primary">Generate Weather Report</button>
+
+        </div>
+      </section>
+
+      <!-- Prediction Overview Section -->
+      <section class="prediction-section">
+        <div class="prediction-header">
+          <h3>📊 Inventory Predictions</h3>
+          <span class="prediction-period">Next 30 Days Forecast</span>
+        </div>
+        <div class="prediction-cards">
+          <div class="prediction-card surplus">
+            <div class="prediction-icon">📈</div>
+            <div class="prediction-label">Predicted Surplus</div>
+            <div class="prediction-amount surplus" id="surplusAmount">+0%</div>
+            <div class="prediction-details" id="surplusDetails">
+              Waiting for forecast data...
+            </div>
+          </div>
+          
+          <div class="prediction-card deficit">
+            <div class="prediction-icon">📉</div>
+            <div class="prediction-label">Predicted Deficit</div>
+            <div class="prediction-amount deficit" id="deficitAmount">0%</div>
+            <div class="prediction-details" id="deficitDetails">
+              Waiting for forecast data...
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Charts Section -->
+      <section class="charts">
+        <div class="chart-container">
+          <div class="chart-header">
+            <h3>Seasonal Product Sales</h3>
+          </div>
+          <canvas id="seasonalChart"></canvas>
+        </div>
+        
+        <div class="chart-container">
+          <div class="chart-header">
+            <h3>Weather Impact Analysis</h3>
+          </div>
+          <canvas id="weatherChart"></canvas>
+        </div>
+      </section>
+    </main>
+  </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const citySearch = document.getElementById('citySearch');
+  const searchBtn = document.getElementById('searchBtn');
+  const searchResults = document.getElementById('searchResults');
+  const surplusAmount = document.getElementById('surplusAmount');
+  const deficitAmount = document.getElementById('deficitAmount');
+  const surplusDetails = document.getElementById('surplusDetails');
+  const deficitDetails = document.getElementById('deficitDetails');
+  const generateReportBtn = document.querySelector('.btn.primary'); // ✅ added this line
+
+  let citiesData = [];
+
+  // Load fallback city list
+  fetch('cities.json')
+    .then(res => res.json())
+    .then(data => citiesData = data.cities)
+    .catch(() => {
+      citiesData = [
+        { name: "Manila", country: "Philippines" },
+        { name: "Cebu City", country: "Philippines" },
+        { name: "Davao City", country: "Philippines" },
+        { name: "Bacoor", country: "Philippines" }
+      ];
+    });
+
+  // Autocomplete
+  citySearch.addEventListener('input', () => {
+    const term = citySearch.value.toLowerCase();
+    searchResults.innerHTML = '';
+    if (term.length < 2) return searchResults.style.display = 'none';
+
+    const filtered = citiesData.filter(c => c.name.toLowerCase().includes(term)).slice(0, 5);
+    if (filtered.length) {
+      filtered.forEach(city => {
+        const item = document.createElement('div');
+        item.className = 'search-result-item';
+        item.textContent = `${city.name}, ${city.country}`;
+        item.onclick = () => {
+          citySearch.value = `${city.name}, ${city.country}`;
+          searchResults.style.display = 'none';
+          getAIForecast(city.name);
+        };
+        searchResults.appendChild(item);
+      });
+      searchResults.style.display = 'block';
+    } else searchResults.style.display = 'none';
+  });
+
+  // Handle Enter key press
+  citySearch.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      const cityName = citySearch.value.trim().split(',')[0];
+      if (cityName) getAIForecast(cityName);
+    }
+  });
+
+  // Handle Search button
+  searchBtn.addEventListener('click', () => {
+    const cityName = citySearch.value.trim().split(',')[0];
+    if (cityName) getAIForecast(cityName);
+  });
+
+  // --- Chart Setup ---
+  const weatherCtx = document.getElementById("weatherChart").getContext("2d");
+  let weatherChart = new Chart(weatherCtx, {
+    type: "line",
+    data: {
+      labels: ["Temp (°C)", "Humidity (%)", "Wind (km/h)"],
+      datasets: [
+        {
+          label: "Predicted Surplus %",
+          data: [0, 0, 0],
+          borderColor: "#48d597",
+          fill: false,
+          tension: 0.4
+        },
+        {
+          label: "Predicted Deficit %",
+          data: [0, 0, 0],
+          borderColor: "#ff6b6b",
+          borderDash: [5, 5],
+          fill: false,
+          tension: 0.4
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: "bottom" },
+        title: {
+          display: true,
+          text: "Weather Impact vs Predicted Inventory Behavior"
+        }
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: "%" } },
+        x: { title: { display: true, text: "Weather Factors" } }
+      }
+    }
+  });
+
+
+    // Get the current date
+  const today = new Date();
+
+  // Format it (e.g., "October 28")
+  const options = { month: 'long', day: 'numeric' };
+  const formattedDate = today.toLocaleDateString('en-US', options);
+
+  // Insert into the <span class="date">
+  document.querySelector('.date').textContent = formattedDate;
+  // --- Seasonal Product Chart ---
+  new Chart(document.getElementById("seasonalChart"), {
+    type: "bar",
+    data: {
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "June"],
+      datasets: [
+        { label: "Product A", data: [5000, 7000, 10000, 15000, 20000, 25000], backgroundColor: "#4f9cff" },
+        { label: "Product B", data: [3000, 5000, 8000, 12000, 10000, 8000], backgroundColor: "#48d597" }
+      ]
+    },
+    options: { responsive: true, plugins: { legend: { position: "bottom" } } }
+  });
+
+  // --- Fetch AI Forecast from Flask ---
+  async function getAIForecast(cityName) {
+    console.log("🔍 Requesting AI forecast for:", cityName);
+    try {
+      const response = await fetch("/predict_ai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ city: cityName })
+      });
+      const data = await response.json();
+
+      if (data.error) {
+        alert("❌ Prediction failed: " + data.error);
+        return;
+      }
+
+      console.log("✅ AI Forecast received:", data);
+
+      // Update Weather Section
+      document.querySelector(".temp").textContent = `${data.temperature}°C`;
+      document.querySelector(".condition").textContent = data.condition;
+      document.querySelector(".weather-stats div:first-child").textContent = `Wind: ${data.wind} km/h`;
+      document.querySelector(".weather-stats div:last-child").textContent = `Humidity: ${data.humidity}%`;
+      document.querySelector(".weather-icon").textContent =
+        data.condition.toLowerCase().includes("rain") ? "🌧️" :
+        data.condition.toLowerCase().includes("cloud") ? "☁️" :
+        data.condition.toLowerCase().includes("sun") ? "☀️" : "🌤️";
+
+      // Update Prediction Cards
+      surplusAmount.textContent = `${data.predicted_surplus}%`;
+      deficitAmount.textContent = `${data.predicted_deficit}%`;
+      surplusDetails.innerHTML = `
+        AI forecast indicates an estimated inventory surplus.<br>
+        Based on ${cityName}'s weather conditions.
+      `;
+      deficitDetails.innerHTML = `
+        AI forecast shows a potential deficit trend.<br>
+        Adjust restocking for ${cityName}.
+      `;
+
+      // Update Weather Impact Chart dynamically
+      weatherChart.data.datasets[0].data = [
+        parseFloat(data.temperature) || 0,
+        parseFloat(data.humidity) || 0,
+        parseFloat(data.predicted_surplus) || 0
+      ];
+      weatherChart.data.datasets[1].data = [
+        parseFloat(data.temperature) || 0,
+        parseFloat(data.humidity) || 0,
+        parseFloat(data.predicted_deficit) || 0
+      ];
+      weatherChart.update();
+
+    } catch (err) {
+      console.error("🚨 Error connecting to AI service:", err);
+      alert("Connection error — please try again later.");
+    }
+  }
+
+  // --- Generate Weather Report Button ---
+  generateReportBtn.addEventListener("click", async () => {
+    const city = document.getElementById("citySearch").value.trim().split(",")[0];
+    const condition = document.querySelector(".condition").textContent;
+    const temp = parseFloat(document.querySelector(".temp").textContent);
+    const wind = document.querySelector(".weather-stats div:first-child").textContent.replace("Wind: ", "").replace(" km/h", "");
+    const humidity = document.querySelector(".weather-stats div:last-child").textContent.replace("Humidity: ", "").replace("%", "");
+    const surplus = document.getElementById("surplusAmount").textContent;
+    const deficit = document.getElementById("deficitAmount").textContent;
+
+    if (!city) {
+      alert("Please search for a city first!");
+      return;
+    }
+
+    const response = await fetch("/generate_report", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ city, condition, temperature: temp, wind, humidity, surplus, deficit })
+    });
+
+    if (!response.ok) {
+      alert("Failed to generate report.");
+      return;
+    }
+
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${city}_WeatherWise_Report.pdf`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  });
+});
+</script>
+
+
+</body>
+</html>
